@@ -9,6 +9,11 @@ import PostsScreen from "./screens/mainScreen/PostsScreen";
 import CreateScreen from "./screens/mainScreen/CreateScreen";
 import ProfileScreen from "./screens/mainScreen/ProfileScreen";
 
+//import icons
+import { AntDesign } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
+
 const AuthStack = createStackNavigator();
 const MainTab = createBottomTabNavigator();
 
@@ -30,10 +35,37 @@ const useRoute = (isAuth) => {
     );
   }
   return (
-    <MainTab.Navigator>
-      <MainTab.Screen name="Posts" component={PostsScreen} />
-      <MainTab.Screen name="Create" component={CreateScreen} />
-      <MainTab.Screen name="Profile" component={ProfileScreen} />
+    <MainTab.Navigator tabBarOptions={{ showLabel: false }}>
+      <MainTab.Screen
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ focused, size, color }) => (
+            <AntDesign name="appstore-o" size={size} color={color} />
+          ),
+        }}
+        name="Posts"
+        component={PostsScreen}
+      />
+      <MainTab.Screen
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ focused, size, color }) => (
+            <FontAwesome name="plus-square" size={35} color={color} />
+          ),
+        }}
+        name="Create"
+        component={CreateScreen}
+      />
+      <MainTab.Screen
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ focused, size, color }) => (
+            <Feather name="user" size={size} color={color} />
+          ),
+        }}
+        name="Profile"
+        component={ProfileScreen}
+      />
     </MainTab.Navigator>
   );
 };
