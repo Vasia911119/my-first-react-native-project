@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import RegistrationScreen from "./screens/auth/RegistrationScreen";
 import LoginScreen from "./screens/auth/LoginScreen";
@@ -15,6 +16,7 @@ const loadApplication = async () => {
 };
 
 const AuthStack = createStackNavigator();
+const MainTab = createBottomTabNavigator();
 
 export default function App() {
   const [isReady, setIsReady] = useState(false);
