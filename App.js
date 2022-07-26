@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-
-import RegistrationScreen from "./screens/auth/RegistrationScreen";
-import LoginScreen from "./screens/auth/LoginScreen";
+import useRoute from "./router";
 
 import * as Font from "expo-font";
 import AppLoading from "expo-app-loading";
@@ -15,11 +11,9 @@ const loadApplication = async () => {
   });
 };
 
-const AuthStack = createStackNavigator();
-const MainTab = createBottomTabNavigator();
-
 export default function App() {
   const [isReady, setIsReady] = useState(false);
+  const routing = useRoute(true);
 
   if (!isReady) {
     return (
@@ -31,20 +25,5 @@ export default function App() {
     );
   }
 
-  return (
-    <NavigationContainer>
-      <AuthStack.Navigator>
-        <AuthStack.Screen
-          options={{ headerShown: false }}
-          name="Login"
-          component={LoginScreen}
-        />
-        <AuthStack.Screen
-          options={{ headerShown: false }}
-          name="Registration"
-          component={RegistrationScreen}
-        />
-      </AuthStack.Navigator>
-    </NavigationContainer>
-  );
+  return <NavigationContainer>{routing}</NavigationContainer>;
 }
