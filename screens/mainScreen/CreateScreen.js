@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 import { Camera, CameraType } from "expo-camera";
 
-const CreateScreen = () => {
+const CreateScreen = ({ navigation }) => {
   const [hasPermission, setHasPermission] = useState(null);
   const [type, setType] = useState(CameraType.back);
   const [camera, setCamera] = useState(null);
-  const [photo, setPhoto] = useState("#");
+  const [photo, setPhoto] = useState(null);
 
   useEffect(() => {
     (async () => {
@@ -23,13 +23,17 @@ const CreateScreen = () => {
   }
 
   const takePhoto = async () => {
-    // if (!camera) return;
+    if (!camera) return;
     const photo = await camera.takePictureAsync();
     setPhoto(photo.uri);
   };
 
   const switchCamera = () => {
     setType(type === CameraType.back ? CameraType.front : CameraType.back);
+  };
+
+  const sendPhoto = () => {
+    navigation.navigate("Posts", { photo });
   };
 
   return (
@@ -46,18 +50,27 @@ const CreateScreen = () => {
         <TouchableOpacity
           onPress={switchCamera}
           activeOpacity={0.8}
-          style={styles.captureContainer}
+          style={styles.buttonContainer}
         >
           <Text style={styles.flip}> Flip </Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={takePhoto}
           activeOpacity={0.8}
-          style={styles.captureContainer}
+          style={styles.buttonContainer}
         >
           <Text style={styles.capture}>Capture</Text>
         </TouchableOpacity>
       </Camera>
+      <View>
+        <TouchableOpacity
+          onPress={sendPhoto}
+          activeOpacity={0.8}
+          style={styles.sendBtn}
+        >
+          <Text style={styles.send}> SEND </Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -77,7 +90,7 @@ const styles = StyleSheet.create({
   capture: {
     color: "#fff",
   },
-  captureContainer: {
+  buttonContainer: {
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 20,
@@ -96,6 +109,20 @@ const styles = StyleSheet.create({
     left: 10,
     borderColor: "fff",
     borderWidth: 1,
+  },
+  sendBtn: {
+    marginHorizontal: 30,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 20,
+    borderWidth: 2,
+    borderColor: "#20b2aa",
+    borderRadius: 10,
+    height: 40,
+  },
+  send: {
+    color: "#20b2aa",
+    fontSize: 20,
   },
 });
 
