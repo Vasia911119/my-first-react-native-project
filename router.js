@@ -35,9 +35,17 @@ const useRoute = (isAuth) => {
     );
   }
   return (
-    <MainTab.Navigator tabBarOptions={{ showLabel: false }}>
+    <MainTab.Navigator>
       <MainTab.Screen
         options={{
+          tabBarShowLabel: false,
+          tabBarStyle: [
+            {
+              display: "flex",
+            },
+            null,
+          ],
+
           headerShown: false,
           tabBarIcon: ({ focused, size, color }) => (
             <AntDesign name="appstore-o" size={size} color={color} />
@@ -48,6 +56,13 @@ const useRoute = (isAuth) => {
       />
       <MainTab.Screen
         options={{
+          tabBarShowLabel: false,
+          tabBarStyle: [
+            {
+              display: "flex",
+            },
+            null,
+          ],
           headerShown: false,
           tabBarIcon: ({ focused, size, color }) => (
             <FontAwesome name="plus-square" size={35} color={color} />
@@ -58,6 +73,13 @@ const useRoute = (isAuth) => {
       />
       <MainTab.Screen
         options={{
+          tabBarShowLabel: false,
+          tabBarStyle: [
+            {
+              display: "flex",
+            },
+            null,
+          ],
           headerShown: false,
           tabBarIcon: ({ focused, size, color }) => (
             <Feather name="user" size={size} color={color} />
